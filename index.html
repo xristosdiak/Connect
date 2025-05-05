@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Co-nnect | Login</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background-color: #F9FAFB;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .login-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: #b91010;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      
+    }
+    .logo img {
+      width: 30px;
+      height: 30px;
+      
+    }
+    h1 {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+    .role-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #b91010;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .role-btn:hover {
+      background-color: #15377f;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">
+      <img src="images/favicon.ico" alt="Logo">
+      <p>nnect</p>
+    </div>
+    <h1>Επιλέξτε τον ρόλο σας</h1>
+    
+    <a href="designer-login.html" class="role-btn">Designer</a>
+    
+    <a href="programmer-login.html" class="role-btn">Developer</a>
+    
+    <a href="manager-login.html" class="role-btn">Design Manager</a>
+    
+    <a href="customer-login.html" class="role-btn">Customer</a>
+  </div>
+</body>
+</html>

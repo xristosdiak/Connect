@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Co-nnect | Add New Project</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #F9FAFB;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      font-size: 1.5rem;
+      color: #b91010;
+    }
+
+    .logo-icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.1rem;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-badge {
+      background: #b91010;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+    }
+
+    .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    padding-top: 2rem;
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    text-align: left;
+    box-sizing: border-box; /* Προσθέτουμε αυτό για να συμπεριλάβει τα padding στο width */
+  }
+
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-tabs {
+      display: flex;
+      background: #F8FAFC;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border: 1px solid #E2E8F0;
+    }
+
+    .section-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem;
+      font-weight: 500;
+      color: #64748B;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .section-tab:hover {
+      background-color: #E2E8F0;
+    }
+
+    .section-tab.active {
+      color: #2563EB;
+      background-color: white;
+      font-weight: 600;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="date"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      box-sizing: border-box;
+    }
+
+    .btn-with-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.25rem;
+      background-color: #2563EB;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-with-icon:hover {
+      background-color: #1D4ED8;
+    }
+
+    .btn-with-icon img {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+    }
+
+    /* Custom Select Styles */
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.25rem;
+      border: 1px solid #E2E8F0;
+      border-radius: 0.5rem;
+      background-color: #F8FAFC;
+      font-size: 1rem;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      background-image: url('images/arrow-down.svg');
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 16px;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      background-color: white;
+    }
+
+    select:hover {
+      border-color: #94A3B8;
+    }
+
+    /* Style για τις επιλογές */
+    option {
+      padding: 0.5rem;
+      background: white;
+    }
+
+    /* Label styling */
+    label[for="assignee"] {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Container για καλύτερο spacing */
+    .assignee-container {
+      margin-top: 1rem;
+      position: relative;
+    }
+
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/favicon.ico" alt="Logo" class="logo-icon">
+      <span>nnect</span>
+    </div>
+    <div class="user-info">
+      <span>Maria Papadopoulou</span>
+      <div class="user-badge">Design Manager</div>
+    </div>
+  </header>
+  <h1 class="page-title">Προσθήκη νέου project</h1>
+
+  <div class="container">
+    <div class="section-tabs">
+      <div class="section-tab active" data-tab="project" onclick="switchTab('project')">Project</div>
+      <div class="section-tab" data-tab="subproject" onclick="switchTab('subproject')">Subproject</div>
+    </div>
+
+    <div id="project" class="tab-content active">
+      <form action="#" method="post">
+        <label for="title">Τίτλος</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="details">Λεπτομέρειες</label>
+        <textarea id="details" name="details" rows="5" required></textarea>
+
+        <label for="deadline">Προθεσμία</label>
+        <input type="date" id="deadline" name="deadline" required>
+
+        <div class="assignee-container">
+            <label for="subproject-assignee">Ανάθεση σε:</label>
+            <select id="subproject-assignee" name="subproject-assignee">
+              <option value="" disabled selected>Το task θα ανατεθεί σε: Sifis Ladopoulos. Μπορείτε να επιλέξετε διαφορετικό Designer</option>
+              <option value="user1">Anna Georgiou</option>
+              <option value="user2">Stavros Kapetanakis</option>
+              <option value="user3">Sifis Ladopoulos</option>
+              <option value="user4">Manolia Athanasiadi</option>
+              <option value="user5">Vaggelis Markogiannakis</option> 
+            </select>
+        </div>
+
+
+        <button type="submit" class="btn-with-icon">
+          <img src="images/add-square.svg" alt="Add icon">
+          Add new project
+        </button>
+      </form>
+    </div>
+
+    <div id="subproject" class="tab-content">
+      <form action="#" method="post">
+        <div class="assignee-container">
+            <label for="assignee">Project</label>
+            <select id="assignee" name="assignee">
+              <option value="" disabled selected>Επιλέξτε σε ποιο Project θέλετε να προσθέσετε subproject</option>
+              <option value="user1">Cosmote Mobile</option>
+              <option value="user5">Εθνική Τράπεζα</option> 
+              <option value="user2">BOX App</option>
+              <option value="user3">ΗΡΩΝ Energy</option>
+              <option value="user4">Shopflix</option>
+            </select>
+        </div>
+        <label for="sub-title">Τίτλος Subproject</label>
+        <input type="text" id="sub-title" name="sub-title" required>
+
+        <label for="sub-details">Λεπτομέρειες Subproject</label>
+        <textarea id="sub-details" name="sub-details" rows="5" required></textarea>
+
+        <label for="sub-deadline">Προθεσμία Subproject</label>
+        <input type="date" id="sub-deadline" name="sub-deadline" required>
+
+        <div class="assignee-container">
+            <label for="assignee">Ανάθεση σε:</label>
+            <select id="assignee" name="assignee">
+              <option value="" disabled selected>Το task θα ανατεθεί σε: Sifis Ladopoulos. Μπορείτε να επιλέξετε διαφορετικό Designer</option>
+              <option value="user1">Anna Georgiou</option>
+              <option value="user2">Stavros Kapetanakis</option>
+              <option value="user3">Sifis Ladopoulos</option>
+              <option value="user4">Manolia Athanasiadi</option>
+              <option value="user5">Vaggelis Markogiannakis</option> 
+            </select>
+        </div>
+
+        <button type="submit" class="btn-with-icon">
+          <img src="images/add-square.svg" alt="Add icon">
+          Add new subproject
+        </button>
+      </form>
+    </div>
+  </div>
+
+</body>
+<script>
+  document.querySelectorAll('.section-tab').forEach(tabElement => {
+    tabElement.addEventListener('click', () => {
+      const tab = tabElement.getAttribute('data-tab');
+
+      // Αφαιρούμε την ενεργή κλάση από όλα τα tabs
+      document.querySelectorAll('.section-tab').forEach(el => el.classList.remove('active'));
+
+      document.querySelector(`.section-tab[data-tab="${tab}"]`).classList.add('active');
+      tabElement.classList.add('active');
+
+      // Κρύβουμε όλο το περιεχόμενο
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      // Εμφανίζουμε το περιεχόμενο του επιλεγμένου tab
+      document.getElementById(tab).classList.add('active');
+    });
+  });
+</script>
+</html>

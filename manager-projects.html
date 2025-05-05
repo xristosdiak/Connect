@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <title> Co-nnect | Projects</title>
+  <style>
+    /* Κοινά Styles */
+    :root {
+      --primary: #2563EB;
+      --bg: #F9FAFB; 
+      --logo-color: #b91010;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: var(--bg); 
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header { 
+      display: flex; 
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      height: 70px;
+    }
+    .logo { 
+      display: flex;
+      align-items: center;
+      font-weight: 800; 
+      letter-spacing: -0.5px; 
+      font-size: 1.5rem;
+      color: var(--logo-color);
+    }
+    .logo-icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.1rem;
+    }
+    .user-info { display: flex; align-items: center; gap: 1rem; }
+    .manager-badge { 
+      background: var(--logo-color); 
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+    }
+
+    /* Main Layout */
+    .main-container {
+      display: flex;
+      margin-top: 70px;
+      min-height: calc(100vh - 70px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: rgb(244, 244, 244);
+      padding: 2rem 1.5rem;
+      border-right: 1px solid #E2E8F0;
+      position: fixed;
+      box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1);
+      height: calc(100vh - 70px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #64748B;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      transition: all 0.3s;
+    }
+
+    .menu a:hover {
+      color: var(--primary);
+    }
+
+    .menu a.active {
+      color: var(--primary);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .menu a.active::before {
+      content: "";
+      position: absolute;
+      left: -1.5rem;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 250px;
+      padding: 2rem;
+    }
+
+    /* Projects Page */
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .search-filter {
+      display: flex;
+      gap: 1rem;
+    }
+    .search-bar {
+      padding: 0.75rem 1rem;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      min-width: 300px;
+    }
+  
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: box-shadow 0.4s ease;      
+      cursor: pointer;
+    }
+    .project-card:hover {
+        box-shadow: 4px 4px 20px rgba(0,0,0,0.15);
+    }
+    
+    .project-content {
+      padding: 1.5rem;
+    }
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .project-client {
+      color: #64748B;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-due {
+      font-size: 0.85rem;
+      background: #FEF3C7;
+      color: #92400E;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 100px;
+    }
+    .project-team {
+      margin-top: 1rem;
+    }
+    .team-title {
+      font-size: 0.85rem;
+      color: #64748B;
+      margin-bottom: 0.75rem;
+    }
+    .team-members {
+      display: flex;
+    }
+    .team-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: -8px;
+      border: 2px solid white;
+      background: #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .more-members {
+      background: #F1F5F9;
+      color: #64748B;
+    }
+
+    /* Project Sub-Projects Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      display: none;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 8px;
+      width: 50%;
+      min-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #64748B;
+    }
+    
+    /* Sub-projects List */
+    .subprojects-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Δύο στήλες */
+      gap: 1rem;
+    }
+    .subproject-item {
+      background: #F8FAFC;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: box-shadow 0.4s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.09);
+      cursor: pointer;
+    }
+    .subproject-item:hover {
+      background: #F1F5F9;
+      box-shadow: 4px 4px 20px rgba(0,0,0,0.15);
+
+    }
+    .subproject-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1E293B;
+    }
+
+    .logout-link {
+            display: flex;
+            align-items: center;
+            display: block;
+            text-decoration: none;
+            color: #64748B;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            margin-top: auto;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .logout-link:hover {
+            color: #b91010;
+        }
+
+        .logout-icon {
+            width: 19px;
+            height: 19px;
+            margin-right: 10px;
+        }
+    
+
+    .assign-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: inline-block;
+      text-align: center;
+      margin-bottom: 0.1rem;
+      transition: background-color 0.3s;
+      border: none;
+      margin-bottom: 0.1rem;
+
+    }
+
+    .assign-btn:hover {
+      background-color: #1D4ED8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #E2E8F0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+      .projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .search-bar { min-width: 100%; }
+      .modal-content {
+        width: 90%;
+        min-width: unset;
+      }
+    }
+  </style>
+</head>
+<body class="manager">
+  <header>
+    <div class="logo">
+      <img src="images/favicon.ico" alt="Logo" class="logo-icon">
+      <span>nnect</span>
+    </div>
+    <div class="user-info">
+      <span>Maria Papadopoulou</span>
+      <div class="manager-badge">Design Manager</div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <nav class="sidebar">
+      <div class="menu">
+        <a href="manager-dashboard.html">Dashboard</a>
+        <a href="manager-projects.html" class="active">Projects</a>
+        <a href="manager-approvals.html">Approvals</a>
+        <a href="manager-teams.html">Teams</a>
+      </div>
+      <a href="index.html" class="logout-link">
+        <img src="images/logout-24.png" alt="Logout" class="logout-icon"> Log-out
+      </a>
+      <a href="add-project.html" class="assign-btn">Add new project</a>
+    </nav>
+
+    <main class="main-content">
+      <div class="projects-header">
+        <h1 class="page-title">All Projects</h1>
+        <div class="search-filter">
+          <input type="text" class="search-bar" placeholder="Search projects...">
+        </div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 - Cosmote -->
+        <div class="project-card" onclick="openSubProjectsModal('Cosmote')">
+          <div class="project-content">
+            <h3 class="project-title">Cosmote Mobile</h3>
+            <div class="project-meta">
+              <span class="project-due">Due: 30/7/2025</span>
+            </div>
+            <div class="project-team">
+              <p class="team-title">Team:</p>
+              <div class="team-members">
+                <div class="team-avatar">M</div>
+                <div class="team-avatar">S</div>
+                <div class="team-avatar">A</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">Εθνική Τράπεζα</h3>
+            <div class="project-meta">
+              <span class="project-due">Due: Jul 15, 2026</span>
+            </div>
+            <div class="project-team">
+              <p class="team-title">Team:</p>
+              <div class="team-members">
+                <div class="team-avatar">K</div>
+                <div class="team-avatar">E</div>
+                <div class="team-avatar more-members">+2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">ΗΡΩΝ Energy</h3>
+            <div class="project-meta">
+              <span class="project-due">Due: Aug 5, 2026</span>
+            </div>
+            <div class="project-team">
+              <p class="team-title">Team:</p>
+              <div class="team-members">
+                <div class="team-avatar">A</div>
+                <div class="team-avatar">E</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">BOX app</h3>
+            <div class="project-meta">
+              <span class="project-due">Due: Jul 28, 2026</span>
+            </div>
+            <div class="project-team">
+              <p class="team-title">Team:</p>
+              <div class="team-members">
+                <div class="team-avatar">V</div>
+                <div class="team-avatar">M</div>
+                <div class="team-avatar">G</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-content">
+            <h3 class="project-title">Shopflix</h3>
+            <div class="project-meta">
+              <span class="project-due">Due: Jul 15, 2025</span>
+            </div>
+            <div class="project-team">
+              <p class="team-title">Team:</p>
+              <div class="team-members">
+                <div class="team-avatar">K</div>
+                <div class="team-avatar">E</div>
+                <div class="team-avatar more-members">+2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Sub-Projects Modal -->
+  <div class="modal-overlay" id="subProjectsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Cosmote Mobile App - Sub Projects</h2>
+        <button class="close-modal" onclick="closeSubProjectsModal()">&times;</button>
+      </div>
+      
+      <div class="subprojects-list">
+        <!-- Sub-project 1 -->
+        <div class="subproject-item" onclick="window.location.href='real-time-manager.html'">
+          <h3 class="subproject-title">Deals For You</h3>
+          <button class="assign-btn" onclick="event.stopPropagation(); openAssignTab('Design System')">Assign Task</button>
+        </div>
+        
+        
+        <!-- Sub-project 2 -->
+        <div class="subproject-item" onclick="window.location.href='real-time-manager.html'">
+          <h3 class="subproject-title">Login Screen</h3>
+          <a class="assign-btn" onclick="event.stopPropagation(); openAssignTab('Design System')">Assign Task</a>
+        </div>
+        
+        
+        <!-- Sub-project 3 -->
+        <div class="subproject-item" onclick="window.location.href='real-time-manager.html'">
+          <h3 class="subproject-title">Υπηρεσία Πληρωμής</h3>
+          <button class="assign-btn" onclick="event.stopPropagation(); openAssignTab('Design System')">Assign Task</button>
+        </div>
+        
+        <!-- Sub-project 4 -->
+        <div class="subproject-item" onclick="window.location.href='real-time-manager.html'">
+          <h3 class="subproject-title">Τεχνική Υποστήριξη</h3>
+          <button class="assign-btn" onclick="event.stopPropagation(); openAssignTab('Design System')">Assign Task</button>
+        </div>
+        
+        <!-- Sub-project 5 -->
+        <div class="subproject-item" onclick="window.location.href='real-time-manager.html'">
+          <h3 class="subproject-title">Προφίλ Χρήστη</h3>
+          <button class="assign-btn" onclick="event.stopPropagation(); openAssignTab('Design System')">Assign Task</button>
+        </div>
+      </div>
+  </div>
+
+  <script>
+    // Open sub-projects modal
+    function openSubProjectsModal(clientName) {
+      const modal = document.getElementById('subProjectsModal');
+      modal.style.display = 'flex';
+    }
+
+    // Close sub-projects modal
+    function closeSubProjectsModal() {
+      const modal = document.getElementById('subProjectsModal');
+      modal.style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('subProjectsModal');
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    function openAssignTab(subprojectTitle) {
+      const url = `assign-task.html?subproject=${encodeURIComponent(subprojectTitle)}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>

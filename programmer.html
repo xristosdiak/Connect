@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Co-nnect | My Tasks </title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Inter', sans-serif; 
+    }
+
+    body {
+      background: #F9FAFB; 
+      color: #333; 
+    }
+
+    header { 
+      display: flex; 
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .logo { 
+      display: flex;
+      align-items: center;
+      font-weight: 800; 
+      letter-spacing: -0.5px; 
+      font-size: 1.5rem;
+      color: #b91010;
+    }
+   
+    .logo-icon {
+  width: 30px; 
+  height: 30px; 
+  margin-right: 0.1rem;
+  }
+
+    .user-info { 
+      display: flex; 
+      align-items: center; 
+      gap: 1rem; 
+    }
+
+    .user-badge { 
+      background: #b91010;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 2rem;
+    }
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /* Task Cards */
+    .task-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+    .task-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: box-shadow 0.4s ease;      
+      box-shadow: 0 1px 3px rgba(0,0,0,0.09);
+      position: relative;
+    }
+
+    .task-card:hover {
+      box-shadow: 4px 4px 20px rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .task-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-project {
+      color: #64748B;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-meta {
+      font-size: 0.85rem;
+      color: #64748B;
+      margin-bottom: 1rem;
+    }
+   
+    .status-due {
+      background: #FEF3C7;
+      color: #92400E;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+    }
+    
+    .btn {
+      background-color: #2563EB;
+      color: white;    
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.3s;
+
+      z-index: 2; /* Για να είναι πάνω από το link του task*/
+    }
+
+    .btn:hover {
+      background-color: #1D4ED8;
+      color: white;
+    }
+
+    /* Card Link Overlay */
+    .card-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+    
+    @media (max-width: 768px) {
+      .container { padding: 0 1rem; }
+      .task-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="images/favicon.ico" alt="Logo" class="logo-icon">
+      <p>nnect</p>
+    </div>
+    <div class="user-info">
+      <span>Markos Galanos</span>
+      <div class="user-badge">Developer</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">My Tasks</h1>
+    </div>
+
+    <div class="task-cards">
+
+      <!-- Task 1 -->
+      <div class="task-card">
+        <a href="guide-prog.html" class="card-link"></a>
+        <div class="task-header">
+          <div>
+            <h3 class="task-title">Redesign Login Screen</h3>
+            <p class="task-project">Cosmote Mobile</p>
+          </div>
+          <span class="status-due">
+            <span>Due: 20/06/2025</span>
+          </span>
+        </div>
+        <button type="button" class="btn">Mark as Done</button>
+      </div>
+      
+      <!-- Task 2 -->
+      <div class="task-card">
+        <a href="guide-prog.html" class="card-link"></a>
+        <div class="task-header">
+          <div>
+            <h3 class="task-title">Payment with card Redesign</h3>
+            <p class="task-project">BOX app</p>
+          </div>
+          <span class="status-due">
+            <span>Due: 25/06/2025</span>
+          </span>
+        </div>
+        <button type="button" class="btn" >Mark as Done</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

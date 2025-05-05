@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Co-nnect | My Tasks </title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <style>
+    /* Κοινά Styles */
+    :root {
+      --primary: #2563EB;
+      --bg: #F9FAFB;
+      
+    }
+    * { margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+        font-family: 'Inter', sans-serif; 
+    }
+
+    body {
+        background: var(--bg); 
+        color: #333; 
+    }
+
+    header { 
+      display: flex; 
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .logo { 
+      display: flex;
+      align-items: center;
+      font-weight: 800; 
+      letter-spacing: -0.5px; 
+      font-size: 1.5rem;
+      color: #b91010;
+    }
+   
+    .logo-icon {
+       width: 30px; 
+      height: 30px; 
+      margin-right: 0.1rem;
+    }
+    .user-info { 
+        display: flex; 
+        align-items: center; 
+        gap: 1rem; 
+    }
+
+    .user-badge { 
+      background: #b91010;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 2rem;
+    }
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /* Task Cards */
+    .task-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+    .task-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: box-shadow 0.4s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.09);
+      position: relative;
+    }
+
+    .task-card:hover {
+      box-shadow: 4px 4px 20px rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .task-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-project {
+      color: #64748B;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .task-meta {
+      font-size: 0.85rem;
+      color: #64748B;
+      margin-bottom: 1rem;
+    }
+    .task-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+    }
+    .status-due {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+    .status-pending {
+      background: #EFF6FF;
+      color: var(--primary);
+    }
+    .status-approved {
+      background: #ECFDF5;
+      color: #065F46;
+    }
+    .task-creator {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+      background: #f2f2f2;
+      color: black
+    }
+    
+    
+    .task-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s;
+
+    }
+    .btn-outline {
+      background: rgb(246, 246, 246);
+      border: 1px solid #E2E8F0;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #1D4ED8;
+      color: white;
+    }
+
+  
+    .btn-primary.btn-pressed {
+      background-color: #6f91ee;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 0 1rem; }
+      .task-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="images/favicon.ico" alt="Logo" class="logo-icon">
+      <span>nnect</span>
+    </div>
+    <div class="user-info">
+      <span>Eleni Athanasiadi</span>
+      <div class="user-badge">UX/UI Designer</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">My Tasks</h1>
+    </div>
+
+    <div class="task-cards">
+      <!-- Task 1 -->
+      <div class="task-card">
+        <div class="task-header">
+          <div>
+            <h3 class="task-title">Τεχνική Υποστήριξη</h3>
+            <p class="task-project">Cosmote Mobile</p>
+          </div>
+          <span class="task-status status-due">
+            <span>Due: 20/06/2025</span>
+          </span>
+        </div>
+        <div class="task-meta">
+          <span class="task-creator">Από: ΗΡΩΝ</span>
+        </div>
+        <p>Πιο ξεκάθαρα βήματα για την επίλυση τεχνικών προβλημάτων.</p>
+        <div class="task-actions">
+          <a href=""></a>
+          <button class="btn btn-outline">Details</button>
+          <div id="liveAlertPlaceholder"></div>
+            <button type="button" class="btn btn-primary">Submit for approval</button>
+        </div>
+      </div>
+      
+      <!-- Task 2 -->
+      <div class="task-card">
+        <div class="task-header">
+          <div>
+            <h3 class="task-title">Deals For You</h3>
+            <p class="task-project">Cosmote Mobile</p>
+          </div>
+          <span class="task-status status-pending">
+            <span>Pending Approval</span>
+          </span>
+        </div>
+        <div class="task-meta">
+          <span class="task-creator">Από: Design Manager</span>
+        </div>
+        <p>Πιο minimal icons και πιο απλό design για το deals for you.</p>
+        <div class="task-actions">
+          <button class="btn btn-outline">Details</button>
+          <button class="btn btn-primary btn-pressed" >Submitted</button>
+        </div>
+      </div>
+      
+      <!-- Task 3 -->
+      <div class="task-card">
+        <div class="task-header">
+          <div>
+            <h3 class="task-title">Payment with card Redesign</h3>
+            <p class="task-project">BOX app</p>
+          </div>
+          <span class="task-status status-due">
+            <span>Due: 25/06/2025</span>
+          </span>
+        </div>
+        <div class="task-meta">
+          <span class="task-creator">Από: BOX</span>
+        </div>
+        <p>Θέλουμε απλούστερο payment με λιγότερα βήματα και πιο ευδιάκριτα buttons.</p>
+        <div class="task-actions">
+          <button class="btn btn-outline">Details</button>
+          <button class="btn btn-primary">Submit for approval</button>
+        </div>
+      </div>
+      
+      <div class="task-card">
+        <div class="task-header">
+          <div>
+            <h3 class="task-title">User Profile</h3>
+            <p class="task-project">Εθνική Τράπεζα</p>
+          </div>
+          <span class="task-status status-approved">
+            <span>Approved</span>
+          </span>
+        </div>
+        <div class="task-meta">
+          <span class="task-creator">Από: Design Manager</span>
+        </div>
+        <p>Χρειαζόμαστε επικαιροποιημένο design για το προφίλ χρήστη με περισσότερες επιλογές.</p>
+        <div class="task-actions">
+          <button class="btn btn-outline">Details</button>
+          <button class="btn btn-outline">Give guidance to IT</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>

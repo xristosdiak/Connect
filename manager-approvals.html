@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Co-nnect | Approvals</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <style>
+        /* Βασικά Styles */
+        :root {
+            --primary: #2563EB;
+            --bg: #F9FAFB;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #b91010;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 0.1rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-badge {
+            background: #b91010;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+        }
+
+        .main-container {
+            display: flex;
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: rgb(244, 244, 244);
+            padding: 2rem 1.5rem;
+            border-right: 1px solid #E2E8F0;
+            position: fixed;
+            box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1);
+            height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #64748B;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: all 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--primary);
+        }
+
+        .menu a.active {
+            color: var(--primary);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .menu a.active::before {
+            content: "";
+            position: absolute;
+            left: -1.5rem;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .logout-link {
+            display: flex;
+            align-items: center;
+            display: block;
+            text-decoration: none;
+            color: #64748B;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            margin-top: auto;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .logout-link:hover {
+            color: #b91010;
+        }
+
+        .logout-icon {
+            width: 19px;
+            height: 19px;
+            margin-right: 10px;
+        }
+
+        .assign-btn {
+            background-color: #2563EB;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 0.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .assign-btn:hover {
+            background-color: #1D4ED8;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .approval-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .approval-table th {
+            text-align: left;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            color: #64748B;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .approval-table td {
+            padding: 1rem 0.75rem;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .approval-table tbody tr {
+            cursor: pointer; 
+            transition: background-color 0.3s;
+        }
+
+        .approval-table tbody tr:hover {
+            background-color: #F3F4F6;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .accept-btn {
+            background-color: #22c525; 
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background-color: #059669;
+        }
+
+        .reassign-btn {
+            background-color: #2563EB; 
+            color: white;
+        }
+
+        .reassign-btn:hover {
+            background-color: #1D4ED8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/favicon.ico" alt="Logo" class="logo-icon" />
+            <p>nnect</p>
+        </div>
+        <div class="user-info">
+            <span>Maria Papadopoulou</span>
+            <div class="user-badge">Design Manager</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <div class="menu">
+                <a href="manager-dashboard.html">Dashboard</a>
+                <a href="manager-projects.html">Projects</a>
+                <a href="manager-approvals.html" class="active">Approvals</a>
+                <a href="manager-teams.html">Teams</a>
+            </div>
+            <a href="index.html" class="logout-link">
+                <img src="images/logout-24.png" alt="Logout" class="logout-icon"> Log-out
+            </a>
+            <a href="add-project.html" class="assign-btn">Add new project</a>
+        </nav>
+
+        <main class="main-content">
+            <div class="card">
+                <div class="card-title">Pending Approvals</div>
+                <table class="approval-table">
+                    <thead>
+                        <tr>
+                            <th>Project-Subproject</th>
+                            <th>Submitted By</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="window.location.href='real-time-manager.html'">
+                            <td>Cosmote - Deals For You</td>
+                            <td>Eleni Athanasiadi</td>
+                            <td>38 min ago</td>
+                            <td>
+                                <button class="btn accept-btn" onclick="event.stopPropagation();">Accept</button>
+                                <a href="assign-task.html" class="btn reassign-btn" onclick="event.stopPropagation();">Reassign</a>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location.href='real-time-manager.html'">
+                            <td>BOX - Live Tracking delivery</td>
+                            <td>Vaggelis Markogiannakis</td>
+                            <td>6 hours ago</td>
+                            <td>
+                                <button class="btn accept-btn" onclick="event.stopPropagation();">Accept</button>
+                                <a href="assign-task.html" class="btn reassign-btn" onclick="event.stopPropagation();">Reassign</a>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location.href='real-time-manager.html'">
+                            <td>BOX - Πληρωμή με κάρτα</td>
+                            <td>Sifis Ladopoulos</td>
+                            <td>8 hours ago</td>
+                            <td>
+                                <button class="btn accept-btn" onclick="event.stopPropagation();">Accept</button>
+                                <a href="assign-task.html" class="btn reassign-btn" onclick="event.stopPropagation();">Reassign</a>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location.href='real-time-manager.html'">
+                            <td>Εθνική Τράπεζα - Εξυπηρέτηση Πελατών</td>
+                            <td>Sifis Ladopoulos</td>
+                            <td>1 day ago</td>
+                            <td>
+                                <button class="btn accept-btn" onclick="event.stopPropagation();">Accept</button>
+                                <a href="assign-task.html" class="btn reassign-btn" onclick="event.stopPropagation();">Reassign</a>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location.href='real-time-manager.html'">
+                            <td>Shopflix - Προφιλ Χρήστη</td>
+                            <td>Stavros Kapetanakis</td>
+                            <td>2 days ago</td>
+                            <td>
+                                <button class="btn accept-btn" onclick="event.stopPropagation();">Accept</button>
+                                <a href="assign-task.html" class="btn reassign-btn" onclick="event.stopPropagation();">Reassign</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
